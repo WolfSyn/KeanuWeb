@@ -199,7 +199,6 @@ export default function App() {
               <p className="mt-3 text-slate-600 max-w-xl">Tell us about your goals. We’ll follow up with a short discovery call and a tailored proposal.</p>
               <div className="mt-8 space-y-3 text-slate-700">
                 <p className="flex items-center gap-3"><Mail className="h-5 w-5 text-[var(--ktech-700)]"/> ktechaiofficial@gmail.com</p>
-                <p className="flex items-center gap-3"><Phone className="h-5 w-5 text-[var(--ktech-700)]"/> (972) 743-2718</p>
                 <p className="flex items-center gap-3"><MapPin className="h-5 w-5 text-[var(--ktech-700)]"/> Dallas • Chicago • Remote-first</p>
               </div>
               <div className="mt-6 flex gap-3">
