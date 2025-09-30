@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Code2, BrainCircuit, Smartphone, ArrowRight, Sparkles, CheckCircle,
-  Mail, Phone, MapPin, Linkedin, Twitter
+  Mail, Phone, MapPin, Instagram
 } from "lucide-react";
 
 // ⛔️ No import needed — logo served from public/img/KtechAI.png
@@ -198,29 +198,49 @@ export default function App() {
               <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Let’s build something great</h2>
               <p className="mt-3 text-slate-600 max-w-xl">Tell us about your goals. We’ll follow up with a short discovery call and a tailored proposal.</p>
               <div className="mt-8 space-y-3 text-slate-700">
-                <p className="flex items-center gap-3"><Mail className="h-5 w-5 text-[var(--ktech-700)]"/> hello@ktechai.com</p>
-                <p className="flex items-center gap-3"><Phone className="h-5 w-5 text-[var(--ktech-700)]"/> (555) 123-4567</p>
-                <p className="flex items-center gap-3"><MapPin className="h-5 w-5 text-[var(--ktech-700)]"/> Chicago • Remote-first</p>
+                <p className="flex items-center gap-3"><Mail className="h-5 w-5 text-[var(--ktech-700)]"/> ktechaiofficial@gmail.com</p>
+                <p className="flex items-center gap-3"><Phone className="h-5 w-5 text-[var(--ktech-700)]"/> (972) 743-2718</p>
+                <p className="flex items-center gap-3"><MapPin className="h-5 w-5 text-[var(--ktech-700)]"/> Dallas • Chicago • Remote-first</p>
               </div>
               <div className="mt-6 flex gap-3">
-                <a href="#" className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200"><Linkedin className="h-4 w-4"/>LinkedIn</a>
-                <a href="#" className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200"><Twitter className="h-4 w-4"/>Twitter</a>
+                <a
+                href="https://www.instagram.com/ktech_ai/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 hover:bg-[var(--ktech-50)]"
+                >
+                  <Instagram className="h-4 w-4" />
+                  Instagram
+                </a>
               </div>
+
             </div>
-            <form className="rounded-2xl border border-slate-200 p-6 bg-white shadow-sm">
+            <form
+            action="https://formspree.io/f/movkdbdj"   // Your Official Back-End Email Handler
+            method="POST"
+            className="rounded-2xl border border-slate-200 p-6 bg-white shadow-sm"
+            >
               <div className="grid sm:grid-cols-2 gap-4">
-                <Input label="Name" placeholder="Jane Doe" />
-                <Input label="Company" placeholder="Acme Inc." />
-                <Input label="Email" type="email" placeholder="jane@acme.com" className="sm:col-span-2" />
-                <Input label="Budget" placeholder="$10k–$50k" />
-                <Input label="Timeline" placeholder="4–8 weeks" />
-                <Textarea label="Project details" placeholder="Tell us about your product, users, and goals…" className="sm:col-span-2" />
+                <Input label="Name" name="name" placeholder="Sample Name" required />
+                <Input label="Company" name="company" placeholder="Sample Inc." />
+                <Input label="Email" name="email" type="email" placeholder="jane@acme.com" required className="sm:col-span-2" />
+                <Input label="Budget" name="budget" placeholder="$10k–$50k" />
+                <Input label="Timeline" name="timeline" placeholder="4–8 weeks" />
+                <Textarea label="Project details" name="details" placeholder="Tell us about your product, users, and goals…" className="sm:col-span-2" />
               </div>
-              <button type="button" className="mt-6 w-full h-11 rounded-xl bg-[var(--ktech-700)] text-white font-semibold hover:shadow-lg">
-                Send request
-              </button>
-              <p className="mt-2 text-xs text-slate-500">This demo form does not submit. Hook it up to your backend or a form service.</p>
-            </form>
+              
+              {/* Optional extras */}
+              <input type="hidden" name="subject" value="New project request — KtechAI" />
+              <input type="hidden" name="_append" value="true" /> {/* keeps unknown fields */}
+              
+            <button type="submit" className="mt-6 w-full h-11 rounded-xl bg-[var(--ktech-700)] text-white font-semibold hover:shadow-lg">
+              Send request
+            </button>
+            
+          <p className="mt-2 text-xs text-slate-500">
+          We’ll get back to you shortly. You may receive a quick verification email from our form service on first submit.
+        </p>
+        </form>
           </div>
         </div>
       </section>
@@ -326,3 +346,4 @@ const posts = [
   { title:"RAG without tears: a pragmatic checklist", minutes:6, excerpt:"From data cleaning to evals—how to avoid common pitfalls." },
   { title:"Swift vs. React Native in 2025", minutes:5, excerpt:"Trade-offs for team skillsets, velocity, and long-term maintenance." },
 ];
+
