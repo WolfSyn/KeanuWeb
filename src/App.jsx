@@ -35,7 +35,7 @@ export default function App() {
               alt="KtechAI"
               width={360}                        // reserve layout space (approx 3:1)
               height={120}
-              className="h-24 sm:h-16 lg:h-28 w-auto"  // << BIGGER: ~56/64/80px tall
+              className="h-24 sm:h-16 lg:h-28 w-auto"  // << BIGGER
               loading="eager"
               decoding="async"
             />
@@ -173,9 +173,9 @@ export default function App() {
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Selected work</h2>
             <a href="#contact" className="text-[var(--ktech-700)] inline-flex items-center gap-2">Start a brief <ArrowRight className="h-4 w-4"/></a>
           </div>
-          <div className="mt-10 grid lg:grid-cols-3 gap-6">
-            {projects.map((p)=> <CaseStudy key={p.title} {...p} />)}
-          </div>
+        <div className="mt-10 grid lg:grid-cols-3 gap-6">
+          {projects.map((p)=> <CaseStudy key={p.title} {...p} />)}
+        </div>
         </div>
       </section>
 
@@ -203,21 +203,21 @@ export default function App() {
               </div>
               <div className="mt-6 flex gap-3">
                 <a
-                href="https://www.instagram.com/ktech_ai/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 hover:bg-[var(--ktech-50)]"
+                  href="https://www.instagram.com/ktech_ai/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-slate-200 hover:bg-[var(--ktech-50)]"
                 >
                   <Instagram className="h-4 w-4" />
                   Instagram
                 </a>
               </div>
-
             </div>
+
             <form
-            action="https://formspree.io/f/movkdbdj"   // Your Official Back-End Email Handler
-            method="POST"
-            className="rounded-2xl border border-slate-200 p-6 bg-white shadow-sm"
+              action="https://formspree.io/f/movkdbdj"
+              method="POST"
+              className="rounded-2xl border border-slate-200 p-6 bg-white shadow-sm"
             >
               <div className="grid sm:grid-cols-2 gap-4">
                 <Input label="Name" name="name" placeholder="Sample Name" required />
@@ -227,19 +227,19 @@ export default function App() {
                 <Input label="Timeline" name="timeline" placeholder="4–8 weeks" />
                 <Textarea label="Project details" name="details" placeholder="Tell us about your product, users, and goals…" className="sm:col-span-2" />
               </div>
-              
+
               {/* Optional extras */}
               <input type="hidden" name="subject" value="New project request — KtechAI" />
-              <input type="hidden" name="_append" value="true" /> {/* keeps unknown fields */}
-              
-            <button type="submit" className="mt-6 w-full h-11 rounded-xl bg-[var(--ktech-700)] text-white font-semibold hover:shadow-lg">
-              Send request
-            </button>
-            
-          <p className="mt-2 text-xs text-slate-500">
-          We’ll get back to you shortly. You may receive a quick verification email from our form service on first submit.
-        </p>
-        </form>
+              <input type="hidden" name="_append" value="true" />
+
+              <button type="submit" className="mt-6 w-full h-11 rounded-xl bg-[var(--ktech-700)] text-white font-semibold hover:shadow-lg">
+                Send request
+              </button>
+
+              <p className="mt-2 text-xs text-slate-500">
+                We’ll get back to you shortly. You may receive a quick verification email from our form service on first submit.
+              </p>
+            </form>
           </div>
         </div>
       </section>
@@ -297,20 +297,39 @@ function ServiceCard({ icon, title, copy, bullets }) {
     </motion.div>
   );
 }
-function CaseStudy({ title, tag, blurb }) {
+
+/* --- UPDATED: image CaseStudy --- */
+function CaseStudy({ title, tag, blurb, image, alt = "" }) {
+  const src = `${import.meta.env.BASE_URL}img/${image}`;
   return (
-    <motion.article initial={{opacity:0,y:12}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:.35}}
-      className="rounded-2xl overflow-hidden border border-slate-200 bg-white">
-      <div className="h-40 bg-gradient-to-br from-[var(--ktech-100)] via-[var(--ktech-200)] to-[var(--ktech-700)]" />
+    <motion.article
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.35 }}
+      className="rounded-2xl overflow-hidden border border-slate-200 bg-white"
+    >
+      <div className="relative aspect-[16/9] overflow-hidden">
+        <img
+          src={src}
+          alt={alt || title}
+          className="h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
       <div className="p-6">
         <span className="inline-block text-xs font-medium px-2 py-1 rounded-lg bg-[var(--ktech-50)] border border-slate-200 text-slate-600">{tag}</span>
         <h3 className="mt-3 font-semibold text-lg">{title}</h3>
         <p className="mt-2 text-sm text-slate-600">{blurb}</p>
-        <a href="#contact" className="mt-4 inline-flex items-center gap-2 text-[var(--ktech-700)]">Request case study <ArrowRight className="h-4 w-4"/></a>
+        <a href="#contact" className="mt-4 inline-flex items-center gap-2 text-[var(--ktech-700)]">
+          Request case study <ArrowRight className="h-4 w-4"/>
+        </a>
       </div>
     </motion.article>
   );
 }
+
 function ArticleCard({ title, minutes, excerpt }) {
   return (
     <motion.article initial={{opacity:0,y:12}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{duration:.35}}
@@ -335,11 +354,32 @@ const serviceCards = [
     copy:"Native and cross-platform apps with CI/CD and analytics.",
     bullets:["iOS/Android (Swift/Kotlin)","React Native/Flutter","App store launches & telemetry"] },
 ];
+
+/* --- UPDATED: now includes images --- */
 const projects = [
-  { title:"AI knowledge base for a support team", tag:"AI • RAG", blurb:"Unified search over tickets, docs, and wikis with role-based access and analytics." },
-  { title:"B2B dashboard redesign", tag:"Web • UX", blurb:"Design system + Next.js migration increased activation by 18%." },
-  { title:"Consumer wellness app", tag:"Mobile • React Native", blurb:"Cross-platform app with offline mode and push notifications." },
+  {
+    title:"Analytics dashboard preview",
+    tag:"AI • RAG",
+    blurb:"Unified search over tickets, docs, and wikis with role-based access and analytics.",
+    image:"Analytics_img.png",
+    alt:"Analytics dashboard preview"
+  },
+  {
+    title:"GMN News web app UI",
+    tag:"Web • UX",
+    blurb:"Design system + Next.js migration increased activation by 18%.",
+    image:"GMNNews_img.png",
+    alt:"GMN News web app UI"
+  },
+  {
+    title:"FireFit mobile app screens",
+    tag:"Mobile • React Native",
+    blurb:"Cross-platform app with offline mode and push notifications.",
+    image:"FireFit_img.png",
+    alt:"FireFit mobile app screens"
+  },
 ];
+
 const posts = [
   { title:"When to pick Next.js vs. pure React", minutes:4, excerpt:"A quick decision tree for marketing sites, apps, and dashboards." },
   { title:"RAG without tears: a pragmatic checklist", minutes:6, excerpt:"From data cleaning to evals—how to avoid common pitfalls." },
